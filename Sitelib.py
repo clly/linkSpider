@@ -1,3 +1,5 @@
+import sys
+
 class SiteLinks:
 	def __init__(self, url, base):
 		self.todo = [url]
@@ -34,7 +36,12 @@ class SiteLinks:
 		check = False
 		ext = ["html", "htm", "asp", "php", "shtml", "pl", "cgi"]
 		urlExt = url.rsplit(".", 1)[-1]
-		if(url[:len(self.base)]==self.base and self.inArray(ext, urlExt)):
+		if("-o" in sys.argv):
+			if(self.inArray(ext, urlExt) or url == self.base):
+				check = True
+		elif(url[:len(self.base)]==self.base and self.inArray(ext, urlExt)):
+			check = True
+		elif(url == self.base):
 			check = True
 		else:
 			check = False

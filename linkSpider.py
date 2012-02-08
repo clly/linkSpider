@@ -1,14 +1,12 @@
 import urllib, sys, os
 import joinURL, Parser, Sitelib
 	
-	
 class link:
 	def __init__(self, url, cameFrom):
 		self.code = 0
 		self.url = url
 		self.follow = False
 		self.cameFrom = cameFrom
-		
 	
 def top(url):
 	num = joinURL.charNum(url, "/") - 2
@@ -23,13 +21,12 @@ def spider(url, base):
 	numlinks = 1
 	while(site.todo):
 		l = site.todo[0]
-		belong = site.belong(l.url)
-		if(not site.checked(l.url) and belong):
-			print "link " + str(numlinks) + ": " + l.url
+		l.follow = site.belong(l.url)
+		if(not site.checked(l.url) and l.follow):
+			if("-v" in sys.argv):
+				print "link " + str(numlinks) + ": " + l.url
 			req = urllib.urlopen(l.url)
-
 			l.code = req.getcode()
-			l.follow = belong
 			if(l.code == 200):
 				if(l.follow):
 					html = req.read()
@@ -47,8 +44,9 @@ def spider(url, base):
 			
 		site.todo.pop(0)
 	
-	print(site.printLive())
-	print(site.printDead())
+	if("-l" in sys.argv):
+		site.printLive()
+	site.printDead()
 	print str(numlinks) + " links searched"
 		
 def findLinks(html, url, site):
@@ -66,12 +64,23 @@ def findLinks(html, url, site):
 			site.todo.append(hyperlinks[i])
 		
 def main():
+	if("-h" in sys.argv):
+		print("\n    Usage: python linkSpider.py <args> <top url>\n" \
+			"\t-h: this help message\n" \
+			"\t-v: verbose output\n" \
+			"\t-l: print live links as well as dead links\n" \
+			"\t-o: check for live or dead links outside the domain")
+		sys.exit(0)
 	if(len(sys.argv) > 1):
-		url = sys.argv[1]
+		url = sys.argv[-1]
 	else:
-		url = "http://wgi/index.html"
+		print("Usage: python linkSpider.py <args> <top url>")
+		sys.exit(0)
 	base = top(url)
 	spider(url, base)
+	
+	print("Press enter to continue")
+	
 	
 if __name__ == '__main__':
 	main();

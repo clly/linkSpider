@@ -18,3 +18,4 @@ class Parser(HTMLParser):
 	
 	def getHyperlinks(self):
 		return self.hyperlinks
+		
