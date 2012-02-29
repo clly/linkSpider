@@ -4,5 +4,4 @@
 			-l: print live links as well as dead links
 			-o: check for live or dead links outside the domain
 			
-Right now there is a limitation where the link must have a trailing slash (/) in order
-to work correctly.
+Right now there is a limitation where the link must have a trailing slash (/) in order to work correctly.
