@@ -8,11 +8,11 @@ class SiteLinks:
 		self.searched = []
 		self.base = base
 		
-	def checked(self, url):
+	def checked(self, link):
 		"""checks if the page has already been read"""
 		check = False
 		for i in self.searched:
-			if(i == url):
+			if(i.url == link.url and i.cameFrom == link.cameFrom):
 				check = True
 				break
 			else:
@@ -45,7 +45,7 @@ class SiteLinks:
 			check = True
 		else:
 			check = False
-			
+		
 		return check
 	
 	def printToDo(self):

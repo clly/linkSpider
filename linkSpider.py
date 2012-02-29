@@ -22,7 +22,7 @@ def spider(url, base):
 	while(site.todo):
 		l = site.todo[0]
 		l.follow = site.belong(l.url)
-		if(not site.checked(l.url) and l.follow):
+		if(not site.checked(l) and l.follow):
 			if("-v" in sys.argv):
 				print "link " + str(numlinks) + ": " + l.url
 			req = urllib.urlopen(l.url)
@@ -37,14 +37,14 @@ def spider(url, base):
 			else:
 				site.deadLinks.append(l)
 
-			site.searched.append(l.url)
+			site.searched.append(l)
 			#print(site.searched)
 			req.close()
 			numlinks += 1
 			
 		site.todo.pop(0)
 	
-	if("-l" in sys.argv):
+	if("-l" in sys.argv or "-v" in sys.argv):
 		site.printLive()
 	site.printDead()
 	print str(numlinks) + " links searched"
@@ -56,7 +56,6 @@ def findLinks(html, url, site):
 	
 	for i in range(len(hyperlinks)):
 		hyperlinks[i] = link(joinURL.process(url, hyperlinks[i], site.base), url)
-		
 	for i in range(len(hyperlinks)):
 		if(site.checked(hyperlinks[i])):
 			pass
@@ -74,7 +73,11 @@ def main():
 	if(len(sys.argv) > 1):
 		url = sys.argv[-1]
 	else:
-		print("Usage: python linkSpider.py <args> <top url>")
+		print("\n    Usage: python linkSpider.py <args> <top url>\n" \
+			"\t-h: this help message\n" \
+			"\t-v: verbose output\n" \
+			"\t-l: print live links as well as dead links\n" \
+			"\t-o: check for live or dead links outside the domain")
 		sys.exit(0)
 	base = top(url)
 	spider(url, base)

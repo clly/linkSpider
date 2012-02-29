@@ -5,7 +5,6 @@ def split(base, url, i=0):
 	num = charNum(url, "/")
 	num = (num - basenum) + 1
 	spl = url.rsplit("/", num)	
-	
 	if(i == 1):
 		spl = spl[:-1]
 	
@@ -72,9 +71,9 @@ def process(url, link, base):
 	return link
 
 def main():
-	url = "http://wgi/documentation/documentation.htm"
-	link = "../depts/accounting/accounting.htm"
-	base = "http://wgi/"
+	url = "http://localhost:41130"
+	link = "test1.html"
+	base = "http://localhost:41130"
 
 	newlink = process(url, link, base)
 	print newlink
