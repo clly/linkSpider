@@ -72,6 +72,8 @@ def main():
 		sys.exit(0)
 	if(len(sys.argv) > 1):
 		url = sys.argv[-1]
+		if(url[-1] != '/'):
+			url += '/'
 	else:
 		print("\n    Usage: python linkSpider.py <args> <top url>\n" \
 			"\t-h: this help message\n" \
