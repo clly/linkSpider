@@ -1,5 +1,5 @@
-  Usage
-  -----
+Usage
+-----
 
     Usage: python linkSpider.py <args> <top url> 
 			-h: this help message
