@@ -34,7 +34,7 @@ class SiteLinks:
         """Checks whether or not the link will end up as an html page.
         To avoid reading in pdf's, downloadable files, etc"""
         check = False
-        ext = ["html", "htm", "asp", "php", "shtml", "pl", "cgi", ""]
+        ext = ["html", "htm", "asp", "php", "shtml", "pl", "cgi", "", "md"]
         urlExt = url.rsplit(".", 1)[-1]
         if("-o" in sys.argv):
             if(self.inArray(ext, urlExt) or url == self.base):

@@ -12,12 +12,14 @@ parser.add_argument("-v", "--verbose",
                     dest="verbose",
                     action="store_true",
                     help="verbose messages",
+                    default=False,
                     )
 
 parser.add_argument("-l", "--live",
                     dest="live",
                     action="store_true",
                     help="print live and dead links",
+                    default=False
                     )
 
 verbose = 0

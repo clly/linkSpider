@@ -2,18 +2,12 @@ import math
 
 def split(base, url, i=0):
     basenum = charNum(base, "/")
-    print basenum
     num = charNum(url, "/")
-    print num
     num = (num - basenum) + 1
-    print num
     spl = url.rsplit("/", num)
-    print spl.__str__()
-    print i
     if(i == 1):
         spl = spl[:-1]
 
-    print spl
     return spl
     
 def charNum(string, char):
@@ -66,6 +60,8 @@ def process(url, link, base):
             link = repl(link, spl, "/", base)
             if(base[-1] == "/"):
                 link = link[1:]
+            link = base + link
+        elif(link[0] == "/"):
             link = base + link
         else:
             spl = split(base, url, 1)
