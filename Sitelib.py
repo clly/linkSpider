@@ -19,13 +19,11 @@ class SiteLinks:
     
     def inArray(self, ext, urlExt):
         """checks if the extension is in the accepted url extensions"""
+        htmlPage = False
         for i in ext:
             if(i == urlExt):
                 htmlPage = True
                 break
-            else:
-                htmlPage = False
-        
         return htmlPage
     
     def belong(self, url):
