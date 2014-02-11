@@ -15,8 +15,6 @@ class SiteLinks:
             if(i.url == link.url and i.cameFrom == link.cameFrom):
                 check = True
                 break
-            else:
-                check = False
         return check
     
     def inArray(self, ext, urlExt):
